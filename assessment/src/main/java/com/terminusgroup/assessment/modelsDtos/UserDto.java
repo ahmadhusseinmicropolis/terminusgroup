@@ -1,33 +1,18 @@
-package com.terminusgroup.assessment.models;
+package com.terminusgroup.assessment.modelsDtos;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-@Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler" })
-public class User {
+public class UserDto {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@Column
     private String firstName;
 	
-	@Column
     private String lastName;
 	
-	@Column
     private String occupation;
 	
-	@Column
     private int age;
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -40,8 +25,8 @@ public class User {
 		return firstName;
 	}
 
-	public void setFirstName(String fisrtName) {
-		this.firstName = fisrtName;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
 	public String getLastName() {
@@ -68,5 +53,4 @@ public class User {
 		this.age = age;
 	}
     
-	
 }

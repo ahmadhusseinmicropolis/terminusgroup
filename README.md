@@ -6,7 +6,8 @@ This is a application using Spring Boot, JPA, Hibernate, AngularJS and MySql dat
 
 <br />
 <br />
-![ss (1)](https://user-images.githubusercontent.com/105771635/184167360-cbe29d1d-60fb-41a7-b678-86d89e613d44.jpg)
+
+![architecture](https://user-images.githubusercontent.com/105771635/184167581-a59aa565-6892-48c2-b48b-dc483a2a2e1f.jpg)
 
 <br />
 <br />

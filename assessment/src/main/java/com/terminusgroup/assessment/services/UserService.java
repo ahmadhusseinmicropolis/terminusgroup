@@ -5,6 +5,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.terminusgroup.assessment.Repositories.UserRepository;
@@ -38,9 +39,11 @@ public class UserService implements IUserService {
 	}
 
 	@Override
+	@Cacheable("getAll")
 	public List<UserDto> getAll() {
 		/**
 		 * Get the users from DB Map users list to userDtos
+		 * cash the results in memory
 		 */
 		List<User> users = userRepository.findAll();
 		List<UserDto> userDtos = users.stream().map(user -> userToDto(user)).collect(Collectors.toList());
@@ -48,9 +51,11 @@ public class UserService implements IUserService {
 	}
 
 	@Override
+	@Cacheable("getById")
 	public UserDto getById(Long id) {
 		/**
 		 * Get the user from DB by id Map user to userDtos
+		 * cash the results in memory
 		 */
 		User user = userRepository.getReferenceById(id);
 		return userToDto(user);

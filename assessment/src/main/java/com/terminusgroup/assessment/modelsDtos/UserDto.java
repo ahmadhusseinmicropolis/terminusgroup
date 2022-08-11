@@ -5,6 +5,9 @@ import lombok.Getter;
 @Getter
 @Builder
 public class UserDto {
+	/**
+	 * Define the userDto.
+	 */
 	
 	public UserDto() {
 		

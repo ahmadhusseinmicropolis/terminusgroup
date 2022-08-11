@@ -5,6 +5,10 @@ import java.util.List;
 import com.terminusgroup.assessment.modelsDtos.UserDto;
 
 public interface IUserService {
+	/**
+	 * User service interface.
+	 * @return
+	 */
 
 	public List<UserDto> getAll();
 

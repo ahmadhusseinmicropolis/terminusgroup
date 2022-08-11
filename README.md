@@ -20,6 +20,7 @@ The application include the following features:
 - Delete user.
 <br />
 <br />
+
 ## The main project structure:
 
 src

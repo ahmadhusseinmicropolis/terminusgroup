@@ -2,6 +2,9 @@
 
 This is a application using Spring Boot, JPA, Hibernate, AngularJS and MySql database.
 
+#### Overview of the architecture shown in the following diagram:![ss](https://user-images.githubusercontent.com/105771635/184163596-69cc52b6-7e65-40c1-9b10-fc844296c6a6.jpg)
+
+
 The application include the following features:
 - Get users.
 - Get user by Id.

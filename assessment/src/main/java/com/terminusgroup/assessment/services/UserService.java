@@ -1,10 +1,16 @@
 package com.terminusgroup.assessment.services;
 
+import static java.util.Optional.ofNullable;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -19,13 +25,14 @@ public class UserService implements IUserService {
 	 */
 	private UserRepository userRepository;
 	private ModelMapper mapper;
-
-	public UserService(UserRepository userRepository, ModelMapper mapper) {
+	private final CacheManager cacheManager;
+	public UserService(UserRepository userRepository, ModelMapper mapper,CacheManager cacheManager ) {
 		/**
 		 * Inject user repository and model mapper.
 		 */
 		this.userRepository = userRepository;
 		this.mapper = mapper;
+		this.cacheManager = cacheManager;
 	}
 
 	@Override
@@ -35,11 +42,12 @@ public class UserService implements IUserService {
 		 */
 		User user = dtoToUser(userDto);
 		User newUser = userRepository.save(user);
+		clearCache();
 		return userToDto(newUser);
 	}
 
 	@Override
-	@Cacheable("getAll")
+	@Cacheable(value = "usersCache" )
 	public List<UserDto> getAll() {
 		/**
 		 * Get the users from DB Map users list to userDtos
@@ -51,11 +59,9 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	@Cacheable("getById")
 	public UserDto getById(Long id) {
 		/**
 		 * Get the user from DB by id Map user to userDtos
-		 * cash the results in memory
 		 */
 		User user = userRepository.getReferenceById(id);
 		return userToDto(user);
@@ -72,6 +78,7 @@ public class UserService implements IUserService {
 		user.setOccupation(userDto.getOccupation());
 		user.setAge(userDto.getAge());
 		User newUser = userRepository.save(user);
+		clearCache();
 		return userToDto(newUser);
 	}
 
@@ -81,7 +88,7 @@ public class UserService implements IUserService {
 		 * Delete user from DB
 		 */
 		userRepository.deleteById(id);
-
+		clearCache();
 	}
 
 	private UserDto userToDto(User user) {
@@ -96,6 +103,15 @@ public class UserService implements IUserService {
 		 * Map from userDto to user
 		 */
 		return mapper.map(dto, User.class);
+	}
+	
+	private void clearCache() {
+		cacheManager.getCacheNames()
+        .stream()
+        .map(cacheName -> ofNullable(cacheManager.getCache(cacheName)))
+        .filter(Optional::isPresent)
+        .map(Optional::get)
+        .forEach(Cache::clear);
 	}
 
 }

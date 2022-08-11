@@ -108,7 +108,7 @@
 									<div class="form-group row"
 										style="padding-left: 10px; padding-right: 10px">
 										<label for="name" class="col-md-3">Age</label> <input
-											class=" col-md-7" type="text" id="firstName" name="firstName"
+											class=" col-md-7" type="number" id="firstName" name="firstName"
 											ng-model="vm.newUser.age" required />
 									</div>
 

@@ -25,6 +25,7 @@ src
 <br />|---- app.js
 <br />|----|---- controlers/user.controller.js
 <br />|----|---- services/user.service.js
+<br /> in addition to the index.jsp file (src/main/webapp/WEB-INF/views/index.jsp)
 <br />
 <br />
 ## java (api):
@@ -45,7 +46,11 @@ src
 <br />|----|----|---- IUserService.java
 <br />|----|----|---- UserService.java
 <br />
-<br />
+### Message Broker
+<br /> We add message broker package, we use MqttClient to imlement the example.
+<br />|----|---- messagebroker
+<br />|----|----|---- MqttClient.java
+<br />|----|----|---- MessageCallback.java
 ## jave (unit test)
 <br /> This folder contains the unit test of the controllers.
 <br />|---- UserControllerTest.java

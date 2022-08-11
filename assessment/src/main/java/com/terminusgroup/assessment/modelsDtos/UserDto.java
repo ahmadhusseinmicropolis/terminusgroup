@@ -1,8 +1,21 @@
 package com.terminusgroup.assessment.modelsDtos;
 
-
+import lombok.Builder;
+import lombok.Getter;
+@Getter
+@Builder
 public class UserDto {
 	
+	public UserDto() {
+		
+	}
+	public UserDto(Long id, String firstName, String lastName, String occupation, int age){
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.occupation = occupation;
+		this.age = age;
+	}
 	private Long id;
 	
     private String firstName;
